@@ -258,8 +258,8 @@ with center:
 
     if st.button("Fetch & Parse Resumes"):
         with st.spinner("Processing..."):
-            user_email = "careers@jffconsultants.com"
-            email_password = "f3HYwGp^FQ0Z"
+            user_email = os.environ.get("USER_EMAIL")
+            email_password = os.environ.get("EMAIL_PASSWORD")
 
             df = parse_resumes_from_email(keyword, user_email, email_password)
             st.session_state.resumes_df = df
