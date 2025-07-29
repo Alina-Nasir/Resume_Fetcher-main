@@ -88,7 +88,7 @@ def parse_resumes_from_email(keyword, user_email, email_password, imap_server = 
         imap.select_folder('INBOX', readonly = True)
 
         messages = imap.search(['SUBJECT', keyword])
-        for uid in messages[:8]:
+        for uid in messages:
             raw = imap.fetch([uid], ['BODY[]'])
             message = pyzmail.PyzMessage.factory(raw[uid][b'BODY[]'])
             print("Processing message: ", message.get_subject())
