@@ -96,7 +96,11 @@ def parse_resumes_from_email(keyword, user_email, email_password, imap_server = 
             for part in message.mailparts:
                 if part.filename and part.filename.lower().endswith('pdf'):
                     pdf_data = part.get_payload()
-                    text = extract_text_from_PDF(pdf_data)
+                    try:
+                        text = extract_text_from_PDF(pdf_data)
+                    except Exception as e:
+                        print(f"[PDF Error] Could not extract text from PDF: {e}")
+                        continue
                     resume_str = extract_content_with_LLM(text)
 
                     if resume_str:
